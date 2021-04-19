@@ -32,23 +32,23 @@ def main():
     except:
         print("pkl not loaded")
         pass
-    # n_cpus = multiprocessing.cpu_count()
-    # pool = multiprocessing.Pool(n_cpus)
+    n_cpus = multiprocessing.cpu_count()
+    pool = multiprocessing.Pool(n_cpus)
 
-    # q = dict()
-    # for _ in range(2):
-    #     print("len q=", len(q_agent.q))
-    #     qs = [q_agent] * n_cpus
-    #     results = pool.map(worker, qs)
-    #     for i,r in enumerate(results):
-    #         # print(i, "=", len(r))
-    #         q_agent.q.update(r)
+    q = dict()
+    for _ in range(2):
+        print("len q=", len(q_agent.q))
+        qs = [q_agent] * n_cpus
+        results = pool.map(worker, qs)
+        for i,r in enumerate(results):
+            # print(i, "=", len(r))
+            q_agent.q.update(r)
 
-    # pool.close()
-    # print("len q=", len(q_agent.q))
-    # print("Ready To Play")
+    pool.close()
+    print("len q=", len(q_agent.q))
+    print("Ready To Play")
 
-    # pickle.dump(q_agent.q, open('q_agent_dict.pkl', 'wb'))
+    pickle.dump(q_agent.q, open('q_agent_dict.pkl', 'wb'))
 
     play(q_agent=q_agent, human=random.randint(0, 1), helper=True)
 
